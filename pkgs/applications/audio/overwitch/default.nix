@@ -2,7 +2,7 @@
 , stdenv
 , fetchFromGitHub
 , libtool
-, libusb
+, libusb1
 , libjack2
 , libsamplerate
 , libsndfile
@@ -15,15 +15,15 @@
 , withGui ? true
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "overwitch";
-  version = "1.0";
+  version = "1.1";
 
   src = fetchFromGitHub {
     owner = "dagargo";
-    repo = pname;
-    rev = version;
-    sha256 = "sha256-RjzPGAXkw/TFv3kevOY6vZTGRdR9N1qO7plnzZ9X3jU=";
+    repo = "overwitch";
+    rev = finalAttrs.version;
+    sha256 = "sha256-PVndXjxcP9nIVP0r1KfeYKzMKTqMCdhi6dCL/B85tYw=";
   };
 
   nativeBuildInputs = [
@@ -34,7 +34,7 @@ stdenv.mkDerivation rec {
 
   buildInputs = [
     libtool
-    libusb
+    libusb1
     libjack2
     libsamplerate
     libsndfile
@@ -61,4 +61,4 @@ stdenv.mkDerivation rec {
     license = licenses.gpl3;
     maintainers = with maintainers; [ dag-h ];
   };
-}
+})

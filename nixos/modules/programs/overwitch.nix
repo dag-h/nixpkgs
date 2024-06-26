@@ -10,7 +10,7 @@ let
   };
 in {
   options.programs.overwitch = {
-    enable = mkEnableOption (lib.mdDoc "Install overwitch and add the necessary udev and hwdb rules.");
+    enable = mkEnableOption "Overwitch, an Overbridge 2 device client for JACK audio";
 
     package = mkOption {
       type = types.package;
@@ -22,12 +22,12 @@ in {
     gui.enable = mkOption {
       type = types.bool;
       default = true;
-      description = lib.mdDoc "Whether to enable the overwitch GUI application.";
+      description = "Whether to enable the overwitch GUI application.";
     };
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = [ overwitch  ];
+    environment.systemPackages = [ overwitch ];
     services.udev.packages = [ overwitch ];
   };
 
